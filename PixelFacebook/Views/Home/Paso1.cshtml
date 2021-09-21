@@ -45,7 +45,7 @@
         <pre>
         <code id="json-request" class="language-javascript">
                 //SDK Facebook
-                fbq('trackCustom', 'Paso_1', { idCredito: "124", monto: '10000' });
+                fbq('trackCustom', 'Paso_1', { order_id: "124", value: '10000' });
             </code>
         </pre>
     </div>
@@ -56,7 +56,7 @@
 
     document.addEventListener("DOMContentLoaded", function (event) {
         //SDK Facebook
-        fbq('trackCustom', 'Paso_1', { idCredito: "124", monto: '10000' });
+        fbq('trackCustom', 'Paso_1', { order_id: "124", value: '10000' });
 
         //request api
         var url = '/Home/PixelFacebook?eventName=Paso_1'

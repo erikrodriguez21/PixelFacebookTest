@@ -28,10 +28,10 @@ namespace PixelFacebook.HttpClientService.DtoObjets
         public string fbp = "fb.1.1558571054389.1098115397";
     }
 
-    public class Custom_Data
+    public class Custom_Data 
     {
-        public string monto { get; set; }
-        public string idCredito { get; set; }
+        public string value { get; set; }
+        public string order_id { get; set; }
         public string currency { get; set; }
     }
 }

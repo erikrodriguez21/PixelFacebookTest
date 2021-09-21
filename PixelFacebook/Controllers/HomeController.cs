@@ -14,10 +14,10 @@ namespace PixelFacebook.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApiFacebookService _api;
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApiFacebookService api)
         {
             _logger = logger;
-            _api = new ApiFacebookService();
+            _api = api;
         }
 
         public IActionResult Index()

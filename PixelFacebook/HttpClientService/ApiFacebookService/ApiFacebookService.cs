@@ -1,4 +1,5 @@
-﻿using PixelFacebook.HttpClientService.DtoObjets;
+﻿using Microsoft.Extensions.Configuration;
+using PixelFacebook.HttpClientService.DtoObjets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,21 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
 {
     public class ApiFacebookService
     {
+        public IConfiguration _config { get; }
         private readonly HttpClientService _httpClient;
-        private readonly string pixelId = "387608306145949";
-        private readonly string accessToken = "EAAFXZAl0f0v8BAOSAzX4kdpuFdrHVGYtp5AAZCkhVPLgiWPQAQdKcBsZCht1bnCuTheaKKB4nyCXIuZChRDuDy1Yx5oj5nmwNqYSpljtbL8MSj3BBScE8ZCRCxSR5etNcVZBeCxWNiq1yFPx5EU0oEmGJnRrFNGLaaWSHLhque2SE3kKkwtlIdlEw1ZAg6yDrgZD";
+        private readonly string pixelId = "";
+        private readonly string accessToken = "";
         private readonly string urlApi = "https://graph.facebook.com/v11.0/";
 
-        public ApiFacebookService()
+        public ApiFacebookService(IConfiguration conf)
         {
+            _config = conf;   
             _httpClient = new HttpClientService();
+            
+            //valores para la api
+            pixelId = _config.GetSection("FBpixelId").Value;
+            accessToken = _config.GetSection("FBaccessToken").Value;
+
         }
 
         /// <summary>
@@ -27,16 +35,16 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
         /// </code>
         /// </example>
         /// </summary>
-        /// <param name="idCredito"></param>
-        /// <param name="monto"></param>
+        /// <param name="order_id"></param>
+        /// <param name="value"></param>
         /// <param name="eventName"></param>
         /// <returns></returns>
-        public async Task<string> PostPixelFB(string idCredito, string monto, EventName eventName, string testEventCode = null) 
+        public async Task<string> PostPixelFB(string order_id, string value, EventName eventName, string testEventCode = null) 
         {
             try
             {
                 string url = "";
-                string data = GetDataJson(idCredito, monto, eventName);
+                string data = GetDataJson(order_id, value, eventName);
                 
                 if (string.IsNullOrEmpty(testEventCode))
                 {
@@ -56,15 +64,15 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
         }
 
         #region methods
-        public string GetDataJson(string idCredito, string monto, EventName eventName)
+        public string GetDataJson(string order_id, string value, EventName eventName)
         {
             try
             {
                 var model = new ApiFacebookDto();
                 var data = new Datum();
                 var custom = new Custom_Data();
-                custom.idCredito = idCredito;
-                custom.monto = monto;
+                custom.order_id = order_id;
+                custom.value = value;
                 custom.currency = "usd";
                 data.action_source = "website";
                 data.event_source_url = "https://localhost:44304/Home/Paso8";
