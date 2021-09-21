@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="header">@ViewBag.Title</h4>
+        </div>
+        <div class="col-md-12">
+            <div class="btn-group btn-group-justified" style="width:100%">
+                <div class="btn btn-default btn-step btn-primary disabled">
+                    <div class="step-number step-number-active">1</div>
+                    <div class="step-text hidden-print hidden-xs hidden-sm"><a style="color:black" href="~/Home/Index">Inicio</a></div>
+                </div>
+                <div class="btn btn-default btn-step disabled">
+                    <div class="step-number">2</div>
+                    <div class="step-text hidden-print hidden-xs hidden-sm"><a style="color:black" href="~/Home/Paso1">Paso 1</a></div>
+                </div>
+                <div class="btn btn-default btn-step disabled">
+                    <div class="step-number">3</div>
+                    <div class="step-text hidden-print hidden-xs hidden-sm"><a style="color:black" href="~/Home/Paso5">Paso 5</a> </div>
+                </div>
+                <div class="btn btn-default btn-step disabled">
+                    <div class="step-number">4</div>
+                    <div class="step-text hidden-print hidden-xs hidden-sm"><a style="color:black" href="~/Home/Paso8">Paso 8</a> </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<hr />
+<h5>Request Result</h5>
+<pre><code id="json-request" class="language-javascript">
+    [
+    {
+    "event_name": "Paso_1",
+    "event_id": "Paso1",
+    "event_time": 1632176195,
+    "action_source": "website",
+    "user_data": {
+    "em": [
+    "7b17fb0bd173f625b58636fb796407c22b3d16fc78302d79f0fd30c2fc2fc068"
+    ],
+    "ph": [
+    "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225"
+    ]
+    },
+    "custom_data": {
+    "monto": "10000",
+    "idCredito": "123"
+    }
+    }
+    ]
+
+</code></pre>

@@ -1,0 +1,707 @@
+@font-face {
+    font-family: "Avenir LT Pro";
+    src: url("alpr.otf") format('opentype');
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding-top: 50px;
+    margin-bottom: 151px;
+    padding-bottom: 30px;
+    min-width: 360px;
+    font-family: "Avenir LT Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /*font-family: "Open Sans",Tahoma,Geneva,sans-serif;*/
+}
+
+/* Setup the Headers */
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: #282460;
+    font-weight: 900;
+    font-size: 14px;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+h3 {
+    color: #333;
+    font-weight: bold;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+
+#main-logo {
+    border: 0;
+    margin: 0;
+}
+
+a.navbar-brand {
+    padding: 0;
+    padding-top: 2px;
+    margin-right: 20px;
+}
+
+div.navbar {
+    min-width: 300px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+    .navbar-header {
+        float: none;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-nav {
+        float: none !important;
+        margin: 7.5px -15px;
+    }
+
+    .navbar-nav>li {
+        float: none;
+    }
+
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in {
+        display: block !important;
+    }
+
+    .collapsing {
+        overflow: hidden !important;
+    }
+}
+
+h4.header,
+div.header,
+div.header h4.header {
+    border-radius: 6px;
+    padding: 8px;
+    background-color: #5B9BD5;
+    color: white;
+}
+
+div.header h4.header {
+    display: inline;
+}
+
+.feature {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.feature-small {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Account Register Styles */
+
+div.register-calc {
+    background-color: #eee;
+    border-radius: 6px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ccc;
+}
+
+div.register-calc>h5 {
+    padding: 15px;
+    padding-bottom: 4px;
+}
+
+div.register-calc-info {
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+
+div.register-calc-info>div {
+    padding-top: 30px;
+    padding-left: 15px;
+}
+
+div.register-calc-info div.side-container {
+    float: left;
+    width: 42px;
+}
+
+div.register-calc-info div.center-container {
+    float: left;
+    width: 96px;
+}
+
+tr.register-calc-info {
+    background-color: #e7e7e7;
+    color: #555;
+}
+
+h4.register-calc-info {
+    margin-left: 10px;
+    margin-top: 0;
+}
+
+div.register-calc-slider {
+    padding: 0;
+    padding-left: 25px;
+    padding-right: 15px;
+}
+
+.btn-circle {
+    text-align: center;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    padding: 0;
+}
+
+/* End of Account Register Styles */
+
+div.slider-selection {
+    background-image: none;
+    background-repeat: no-repeat;
+    background-color: #2d6ca2;
+}
+
+div.slider-handle {
+    background-image: none;
+    width: 35px;
+    height: 35px;
+    opacity: 1.0;
+}
+
+.slider.slider-horizontal .slider-handle {
+    top: -7px;
+    background-color: #2d6ca2;
+    background-image: initial;
+    opacity: initial;
+}
+
+input[type='range']::-webkit-slider-runnable-track,
+input[type='range']::-webkit-slider-thumb,
+input[type='range'] {
+    -webkit-appearance: none;
+}
+
+input[type='range']:focus {
+    outline: none;
+}
+
+input[type='range'] {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 25px 25px 25px 25px;
+    height: 15px;
+    width: 100%;
+    outline: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 25px 25px 25px 25px;
+    transform: translateY(calc(40px - 40px / 2));
+    background-color: #2d6ca2;
+    border: none;
+    margin-top: -40px;
+    cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 25px 25px 25px 25px;
+    background-color: #2d6ca2;
+    border: none;
+    margin-top: -40px;
+    cursor: pointer;
+}
+
+#rangeCantidad::-webkit-slider-runnable-track {
+    background: linear-gradient(to left, #2d6ca2, #2d6ca2) 0 100% no-repeat content-box;
+}
+
+#rangeCantidad::-webkit-slider-thumb {
+    background-color: #2d6ca2;
+}
+
+#rangePlazo::-webkit-slider-runnable-track {
+    background: linear-gradient(to left, #2d6ca2, #2d6ca2) 0 100% no-repeat content-box;
+}
+
+#rangePlazo::-webkit-slider-thumb {
+    background-color: #2d6ca2;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 1030;
+    display: block;
+    visibility: visible;
+    font-size: 12px;
+    line-height: 1.4;
+    opacity: 0;
+    filter: alpha(opacity=0)
+}
+
+.tooltip-in {
+    opacity: .9;
+    filter: alpha(opacity=90)
+}
+
+.tooltip .top {
+    margin-top: -3px;
+    padding: 5px 0
+}
+
+.tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    background-color: #000;
+    border-radius: 4px
+}
+
+.tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid
+}
+
+.tooltip.top .tooltip-arrow {
+    bottom: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px 5px 0;
+    border-top-color: #000
+}
+
+.form-readonly .form-control,
+.form-readonly .form-horizontal .control-label,
+.form-readonly label,
+.form-readonly .help-block {
+    font-size: 90%;
+}
+
+.form-readonly .form-control {
+    height: 30px;
+}
+
+.form-readonly textarea.form-control {
+    height: 90px;
+}
+
+@media (min-width:768px) {
+    div.wizard-step {
+        min-height: 60px;
+        padding: 0;
+    }
+}
+
+.modal-lg {
+    width: 1100px;
+}
+
+.drop-shadow {
+    -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 151px;
+    color: #bcbcbc;
+    border-top: 1px solid #333366;
+    background-color: #444;
+    font-size: 12px;
+}
+
+.footer.drop-shadow {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.footer .wrapper {
+    background-color: #444;
+}
+
+.footer address {
+    margin: 0;
+}
+
+.footer .footer-top-row {
+    text-align: center;
+    margin: 4px;
+}
+
+.footer .footer-top-row a {
+    color: #00aced;
+    margin-left: 10px;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.footer div.smallprint {
+    font-size: 10px;
+}
+
+.footer .footer-top-row div.smallprint a {
+    margin-left: initial;
+    margin-right: initial;
+    white-space: initial;
+}
+
+.footer .footer-bottom-row {
+    text-align: center;
+}
+
+/* Create square icons, white logo on colored background */
+
+#social-bar {
+    text-align: center;
+    padding-bottom: 10px;
+    vertical-align: central;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+}
+
+#social-bar .icon {
+    color: white;
+    border-radius: 4px;
+    border: 1px outset rgba(128, 128, 128, 0.5);
+    min-width: 27px;
+    line-height: 27px;
+    text-align: center;
+    text-shadow: 1px 1px 1px rgba(128, 128, 128, 0.5);
+}
+
+#social-bar a {
+    margin-right: 0px;
+    padding: 5px;
+    /* Increase hit rectangle for touch devices */
+}
+
+#social-bar a:first-child {
+    padding-left: 0;
+}
+
+/* Set icon color related to the service */
+
+#social-bar .icon-facebook {
+    background: #3B5998;
+}
+
+#social-bar .icon-twitter {
+    background: #00ACED;
+}
+
+#social-bar i.icon-youtube {
+    background: #CC181E;
+}
+
+/* Don't underline icon etc. */
+#social-bar a:hover {
+    text-decoration: none;
+}
+
+#social-bar a:hover span {
+    text-decoration: underline;
+    color: #333333;
+    /* Match icon highlight color */
+}
+
+/* Animate mouse hover */
+#social-bar a .icon {
+    transition: background 0.5s;
+    font-size: 20px;
+}
+
+#social-bar a:hover .icon {
+    background: #333333;
+    transition: background 0.5s;
+}
+
+/* Wizard Steps Process */
+.btn-step {
+    height: 85px;
+}
+
+.btn-step>div.step-text {
+    white-space: initial;
+    font-size: 10px;
+    height: 30px;
+}
+
+.btn-step>div.step-number {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 15px;
+    border-radius: 15px;
+    border-width: 2px;
+    border-color: #333;
+    border-style: solid;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 6px;
+}
+
+.btn-step>div.step-number.step-number-active {
+    border-color: #eee;
+}
+
+/* Calculator Compact View */
+
+@media(min-width: 1200px) {
+    #calccompact {
+        margin-left: 67px;
+    }
+}
+
+#calccompact.affix {
+    position: fixed;
+    top: 60px;
+}
+
+#calccompact.affix-top {
+    position: static;
+}
+
+#calccompact.affix-bottom {
+    position: absolute;
+    bottom: 120px;
+}
+
+@media screen and (max-width: 640px) {
+    table {
+        overflow-x: auto;
+        display: block;
+    }
+}
+
+table.dataTable.table-condensed {
+    font-size: 12px;
+}
+
+/* Style file Browse buttons */
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+div.ic-selector-container {
+    width: 140px;
+    text-align: left;
+    float: left;
+}
+
+div.ic-selector {
+    display: inline-block;
+    margin-right: 6px;
+}
+
+tr.period-detail,
+tr.part-invoice {
+    display: none;
+}
+
+.table-bordered > tbody > tr.period-detail > td,
+.table-bordered > tbody > tr.part-invoice > td {
+    line-height: 14px;
+    border-top-width: 0px;
+    font-size: smaller;
+}
+
+.table-bordered > tbody > tr.part-invoice > td {
+    vertical-align: middle;
+}
+
+.table-bordered > tbody > tr.part-invoice > td.part-empty {
+    background: #f5f5f5;
+    color: #3f3333;
+}
+
+tr.period-detail .btn-xs {
+    font-size: 10px;
+}
+
+tr.part-invoice .btn {
+    width: 100%;
+}
+
+.part-title + .tooltip > .tooltip-inner,
+.part-info + .tooltip > .tooltip-inner {
+    max-width: none;
+    white-space: nowrap;
+    background-color: transparent;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+div.mora-controls {
+    width: 118px;
+    display: inline-block;
+    text-align: left;
+    float: left;
+}
+
+div.advance-controls {
+    width: 118px;
+    display: inline-block;
+    text-align: left;
+    float: left;
+}
+
+div.mora-enviar-xero,
+div.mora-anular,
+div.advance-anular,
+div.period-stats,
+div.part-info {
+    display: none;
+}
+
+div.period-stats,
+div.part-info {
+    max-width: 300px;
+    position: relative;
+    overflow: auto;
+}
+
+table.period-stats th,
+table.part-info th {
+    text-align: center;
+}
+
+table.period-stats td,
+table.part-info td {
+    text-align: right;
+}
+
+
+.centered {
+    text-align: center;
+}
+
+.period-title+.tooltip>.tooltip-inner {
+    max-width: none;
+    white-space: nowrap;
+    background-color: transparent;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.table-borderless>td,
+.table-borderless>th {
+    border: 0;
+}
+
+.well {
+    background-image: none !important;
+    margin-bottom: 15px !important;
+    padding-bottom: 15px !important;
+    padding-top: 0px !important;
+}
+
+@media print {
+
+    .no-print,
+    .no-print * {
+        display: none !important;
+    }
+}
+
+
+#modalTablaAmortizacion .overflow {
+    overflow-y: auto !important;
+}
+
+/* PayBook customization */
+.syncBoxS {
+    list-style-type: none;
+}
+
+.syncBoxS li {
+    cursor: pointer;
+}
+
+.light .syncBoxS>li:hover {
+    background: #EEE;
+}
+
+.dark .syncBoxS>li:hover {
+    background: #6C7179;
+}
+
+/* loading */
+.loader{
+    position:fixed;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:100%;
+    z-index:9999;
+    background: url('../Content/img/loading.gif') 50% 50% no-repeat rgb(249,249,249);
+    background-size:50PX 50px;
+    opacity: .8;
+}

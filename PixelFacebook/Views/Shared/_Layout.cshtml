@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PixelFacebook</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/styles.css" rel="stylesheet" />
+
+    <link href="~/css/prism.css" rel="stylesheet" />
+    <script src="~/js/prism.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/logo-aspiria.png" />
+                </a>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Paso1">Paso1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Paso5">Paso5</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Paso8">Paso8</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div class="footer drop-shadow">
+        <div class="wrapper">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-md-12 text-center">
+                        <div>
+                            <a href="https://www.aspiria.mx/legal">TÉRMINOS Y CONDICIONES</a> <a href="https://www.aspiria.mx/privacy">AVISO DE PRIVACIDAD</a> <a href="https://www.aspiria.mx/security">SEGURIDAD</a> <a href="https://www.aspiria.mx/contact">SERVICIO AL CLIENTE</a>
+                        </div>
+                        <div class="row">
+                            <div id="social-bar">
+                                <a href="https://www.facebook.com/aspiria.mx" rel="noopener"
+                                   target="_blank"> <i class="icon icon-facebook fa fa-facebook"></i> </a> <a href="https://twitter.com/Aspiriamx" rel="noopener" target="_blank">
+                                    <i class="icon icon-twitter fa fa-twitter"></i>
+                                </a> <a href="https://www.youtube.com/channel/UCBE1Cg86UXAQMSpDdnCwZog/feed" rel="noopener"
+                                        target="_blank"><i class="icon icon-youtube fa fa-youtube"></i></a>
+                                <script id="gapi"
+                                        src="Nuevo%20Cr%C3%A9dito%20-%20Paso%201%20-%20Aspiria%20SAC%20Archivos/platform.js"
+                                        async="" defer="defer" gapi_processed="true"></script>
+                                <script>window.___gcfg = { lang: 'es-MX' };</script>
+                                <div style="position: absolute; width: 450px; left: -10000px;" id="___plusone_0">
+                                    <iframe ng-non-bindable="" hspace="0" marginheight="0" marginwidth="0" scrolling="no"
+                                            style="position:absolute;top:-10000px;width:450px;margin:0px;border-style:none"
+                                            tabindex="0" vspace="0" id="I0_1632233919277" name="I0_1632233919277"
+                                            src="Nuevo%20Cr%C3%A9dito%20-%20Paso%201%20-%20Aspiria%20SAC%20Archivos/fastbutton.html"
+                                            data-gapiattached="true" width="100%" frameborder="0"></iframe>
+                                </div>
+                                <g:plusone data-gapiscan="true" data-onload="true" data-gapistub="true"></g:plusone>
+                            </div>
+                        </div>
+                        <div class="">
+                            <p class="">
+                                *Aplican restricciones y sujeto a la previa aprobación del crédito.
+                                <br />
+                                El Buró de Entidades Financieras tiene información de Aspiria sobre
+                                nuestras obligaciones ante la CONDUSEF.
+                                Consúltalo en <a href="https://www.buro.gob.mx./">https://www.buro.gob.mx.</a>
+                                <br />
+                                <a href="https://sac-staging.aspiria.mx/contact">
+                                    Unidad
+                                    Especializada de Atención al Cliente
+                                </a>
+                                Horario de atención de Lunes a Viernes de 9am a 5pm.
+                                Aspiria es una marca registrada en México.
+
+                                Libertad 1966 Col. Americana C.P. 44160 Guadalajara, Jalisco, Mexico.
+                                <br />
+                                ADVANTECH SERVICIOS FINANCIEROS SAPI DE CV, SOFOM ENR ©
+                                <script>document.write(new Date().getFullYear());</script>2021
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-12 text-center ">
+                        <p class="">
+                            <img src="~/img/logo-buro.png"
+                                 style="display:inline-block;padding-bottom:15px"> <br>
+                            El Buró de Entidades Financieras contiene información de ADVANTECH
+                            SERVICIOS FINANCIEROS SAPI DE CV SOFOM ENR sobre nuestro desempeño
+                            frente a los Usuarios, por la prestación de productos y servicios. <br />
+                            Te invitamos a consultarlo también en la página
+                            <a href="https://www.buro.gob.mx/" rel="noopener" target="_blank">https://www.buro.gob.mx</a>
+                            &nbsp;ó a través de <a href="https://sac-staging.aspiria.mx/buroaspiria" rel="noopener" target="_blank">https://www.aspiria.mx/buroaspiria</a>.
+                            De conformidad con lo dispuesto por el Artículo 87-J de la Ley General
+                            de Organizaciones <br /> y Actividades Auxiliares del Crédito, 'Advantech
+                            Servicios Financieros', Sociedad Anónima Promotora de Inversión de
+                            Capital Variable, Sociedad Financiera de Objeto Múltiple, Entidad No
+                            Regulada, <br /> no requiere de autorización de la Secretaria de Hacienda y
+                            Crédito Público para su constitución ni para la celebración del presente
+                            contrato, y está sujeta a la supervisión o vigilancia de la Comisión
+                            Nacional Bancaria <br /> y de Valores, únicamente en materia de prevención y
+                            detección de Operaciones con Recursos de Procedencia Ilícita, Terrorismo
+                            y Terrorismo Internacional, de conformidad a lo establecido en el
+                            artículo 56 <br /> de la Ley antes citada.  <strong>
+                                *Ejemplo de
+                                amortización: Crédito por $10,000 a un plazo de 8 semanas: $200 Comisión
+                                por apertura IVA Incluido + $649.60 Intereses ordinarios (Tasa Simple y
+                                Fija) IVA Incluido* <br />
+                            </strong> | Total a pagar $10,649.60 | Monto a
+                            recibir $9,800 | Costo Anual Total (CAT) promedio sin IVA 131.3% | Tasa
+                            Anual Simple y Fija sin IVA 36.4% | Fecha de cálculo 15 de Diciembre de
+                            2020 | <br /> *Tasa y comisión sujeta a cambios con base en análisis de riesgo.
+                        </p>
+                    </div><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '387608306145949');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1687912951428482&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+   
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
