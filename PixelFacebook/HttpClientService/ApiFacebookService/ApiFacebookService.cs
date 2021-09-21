@@ -20,7 +20,7 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
         {
             _config = conf;   
             _httpClient = new HttpClientService();
-            
+             
             //valores para la api
             pixelId = _config.GetSection("FBpixelId").Value;
             accessToken = _config.GetSection("FBaccessToken").Value;
