@@ -13,6 +13,7 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
         private readonly HttpClientService _httpClient;
         private readonly string pixelId = "";
         private readonly string accessToken = "";
+        private readonly string testEventCode = "";
         private readonly string urlApi = "https://graph.facebook.com/v11.0/";
 
         public ApiFacebookService(IConfiguration conf)
@@ -23,7 +24,7 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
             //valores para la api
             pixelId = _config.GetSection("FBpixelId").Value;
             accessToken = _config.GetSection("FBaccessToken").Value;
-
+            testEventCode = _config.GetSection("testEventCode").Value;
         }
 
         /// <summary>
