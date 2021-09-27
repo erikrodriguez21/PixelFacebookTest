@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PixelFacebook.HttpClientService.ApiFacebookService;
 using PixelFacebook.Models;
@@ -12,16 +13,20 @@ namespace PixelFacebook.Controllers
 {
     public class HomeController : Controller
     {
+        public IConfiguration _config { get; }
         private readonly ILogger<HomeController> _logger;
         private readonly ApiFacebookService _api;
-        public HomeController(ILogger<HomeController> logger, ApiFacebookService api)
+        
+        string testEvntCode;
+        public HomeController(ILogger<HomeController> logger, ApiFacebookService api, IConfiguration config)
         {
+            _config = config;
             _logger = logger;
             _api = api;
         }
 
         public IActionResult Index()
-        {
+        {            
             return View();
         }
 
@@ -46,31 +51,33 @@ namespace PixelFacebook.Controllers
             return View();
         }
 
-
-        public async Task<JsonResult> PixelFacebook(string eventName)
+        /// revisar y terminar la peticion
+        public async Task<JsonResult> PixelFacebook(string eventName, string userAgent, string email, string urlSource, string monto = "0")
         {
             try
             {
+                
+                testEvntCode = _config.GetSection("testEventCode").Value; 
                 string jsonRes = "";
 
                 if (eventName == ApiFacebookService.EventName.Paso_1.ToString())
                 {
-                    jsonRes = await _api.PostPixelFB("", "", ApiFacebookService.EventName.Paso_1);
+                    jsonRes = await _api.PostPixelFB(monto, ApiFacebookService.EventName.Paso_1, userAgent, email, urlSource, testEvntCode);
                 }
 
                 if (eventName == ApiFacebookService.EventName.Paso_5.ToString())
                 {
-                    jsonRes = await _api.PostPixelFB("", "", ApiFacebookService.EventName.Paso_5);
+                    jsonRes = await _api.PostPixelFB(monto, ApiFacebookService.EventName.Paso_5, userAgent, email, urlSource, testEvntCode);
                 }
 
                 if (eventName == ApiFacebookService.EventName.Paso_8.ToString())
                 {
-                    jsonRes = await _api.PostPixelFB("", "", ApiFacebookService.EventName.Paso_8);
+                    jsonRes = await _api.PostPixelFB(monto, ApiFacebookService.EventName.Paso_8, userAgent, email, urlSource, testEvntCode);
                 }
 
                 if (eventName == ApiFacebookService.EventName.Solicitud_Enviada.ToString())
                 {
-                     jsonRes = await _api.PostPixelFB("1234", "10000", ApiFacebookService.EventName.Solicitud_Enviada);
+                     jsonRes = await _api.PostPixelFB(monto, ApiFacebookService.EventName.Solicitud_Enviada, userAgent, email, urlSource, testEvntCode);
                 }
 
 
@@ -89,6 +96,46 @@ namespace PixelFacebook.Controllers
                 }
             }
         }
+
+        public async Task<JsonResult> Test() 
+        {
+            try
+            {
+                //string ip = HttpContext.Connection.RemoteIpAddress.ToString();
+                string jsonRes = await _api.testApi("https://jsonplaceholder.typicode.com/users");
+                return Json(jsonRes);
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    return Json(ex.InnerException.Message);
+                }
+                else
+                {
+                    return Json(ex.Message);
+
+                }
+            }
+        }
+
+        public IActionResult jsResult(string evnt) 
+        {
+           
+            string script = "var userAgent = window.navigator.userAgent;" +
+                "alert('"+ evnt +" --- ' + userAgent)";
+            return new JavaScriptResult(script);
+        }
+
+        public class JavaScriptResult : ContentResult
+        {
+            public JavaScriptResult(string script)
+            {
+                this.Content = script;
+                this.ContentType = "application/javascript";
+            }
+        }
+
 
 
 

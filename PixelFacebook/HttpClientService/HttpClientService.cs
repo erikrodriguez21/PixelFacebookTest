@@ -1,10 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PixelFacebook.HttpClientService
@@ -27,7 +30,7 @@ namespace PixelFacebook.HttpClientService
         public async Task<string> GetAsync(string MethodWithParameters, string accessToken = null)
         {
             try
-            {
+            {                
                 string response = "";
                 using (var client = new HttpClient())
                 {
@@ -187,6 +190,11 @@ namespace PixelFacebook.HttpClientService
         #endregion
 
         #region Methods
+        public async Task<string> GetExternalIp() 
+        {
+            return await GetAsync("https://api.ipify.org/");
+        }
+
         public void CertificateValidation()
         {
             ServicePointManager.Expect100Continue = true;

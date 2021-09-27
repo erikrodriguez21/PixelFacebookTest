@@ -2,7 +2,10 @@
 using PixelFacebook.HttpClientService.DtoObjets;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PixelFacebook.HttpClientService.ApiFacebookService
@@ -11,10 +14,10 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
     {
         public IConfiguration _config { get; }
         private readonly HttpClientService _httpClient;
-        private readonly string pixelId = "";
-        private readonly string accessToken = "";
-        private readonly string testEventCode = "";
-        private readonly string urlApi = "https://graph.facebook.com/v11.0/";
+        private readonly string _pixelId = "";
+        private readonly string _accessToken = ""; 
+        //private readonly string _testEventCode = "";
+        private readonly string _urlApi = "https://graph.facebook.com/v11.0/";
 
         public ApiFacebookService(IConfiguration conf)
         {
@@ -22,10 +25,18 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
             _httpClient = new HttpClientService();
              
             //valores para la api
-            pixelId = _config.GetSection("FBpixelId").Value;
-            accessToken = _config.GetSection("FBaccessToken").Value;
-            testEventCode = _config.GetSection("testEventCode").Value;
+            _pixelId = _config.GetSection("FBpixelId").Value;
+            _accessToken = _config.GetSection("FBaccessToken").Value;
+            //_testEventCode = _config.GetSection("testEventCode").Value;
         }
+
+        public async Task<string> testApi(string url)
+        {
+
+            var res = await _httpClient.GetExternalIp();          
+            return $"IP: {res} \n" + await _httpClient.GetAsync(url); 
+        }
+
 
         /// <summary>
         /// Petición POST para pixel de facebook
@@ -40,22 +51,22 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
         /// <param name="value"></param>
         /// <param name="eventName"></param>
         /// <returns></returns>
-        public async Task<string> PostPixelFB(string order_id, string value, EventName eventName, string testEventCode = null) 
+        public async Task<string> PostPixelFB(string value, EventName eventName, string userAgent, string email, string urlSource, string testEventCode = null) 
         {
             try
             {
-                string url = "";
-                string data = GetDataJson(order_id, value, eventName);
-                
+               
+                string data = await GetDataJson(value, eventName, userAgent, email, urlSource), url = "";
+
                 if (string.IsNullOrEmpty(testEventCode))
                 {
-                    url = $"{urlApi + pixelId}/events?access_token={accessToken}&data={data}"; 
+                    url = $"{_urlApi + _pixelId}/events?access_token={_accessToken}&data={data}";
                 }
                 else
                 {
-                    url = $"{urlApi + pixelId}/events?access_token={accessToken}&data={data}&test_event_code={testEventCode}";
+                    url = $"{_urlApi + _pixelId}/events?access_token={_accessToken}&data={data}&test_event_code={testEventCode}";
                 }
-                
+
                 return await _httpClient.PostAsync(url, "");
             }
             catch (Exception)
@@ -65,25 +76,31 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
         }
 
         #region methods
-        public string GetDataJson(string order_id, string value, EventName eventName)
+
+        public async Task<string> GetDataJson(string value, EventName eventName, string userAgent, string email, string urlSource)
         {
             try
             {
                 var model = new ApiFacebookDto();
                 var data = new Datum();
                 var custom = new Custom_Data();
-                custom.order_id = order_id;
-                custom.value = value;
-                custom.currency = "usd";
-                data.action_source = "website";
-                data.event_source_url = "https://localhost:44304/Home/Paso8";
-                data.event_name = eventName.ToString();
-                data.event_id = eventName.ToString().Replace("_", "");
-
-                data.event_time = DateTimeOffset.Now.ToUnixTimeSeconds();
-                data.user_data = new User_Data();
-                data.custom_data = custom;
                 var list = new List<Datum>();
+                //monto
+                custom.value = value;
+                custom.currency = "mxn";
+                //action source
+                data.action_source = "website";                
+                //user data
+                data.user_data = new User_Data();
+                data.user_data.client_ip_address = await _httpClient.GetExternalIp(); //optiene la ip del servidor
+                data.user_data.client_user_agent = userAgent;
+                data.user_data.em = new string[] { email };
+                //event
+                data.event_id = eventName.ToString().Replace("_", "");
+                data.event_source_url = urlSource; 
+                data.event_name = eventName.ToString();
+                data.event_time = DateTimeOffset.Now.ToUnixTimeSeconds();
+                data.custom_data = custom;
                 list.Add(data);
                 model.data = list;
 

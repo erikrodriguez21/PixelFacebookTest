@@ -58,3 +58,25 @@
     ]
 
 </code></pre>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $.ajax({
+            type: 'POST',
+            url: '/Home/Test',
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                document.getElementById('json-request').innerHTML = data;
+            },
+            error: function (err) {
+                alert(err);
+            }
+        });
+
+    });
+
+
+    
+</script>
+

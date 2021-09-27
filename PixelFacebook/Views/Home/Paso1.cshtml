@@ -51,27 +51,17 @@
     </div>
 </div>
 
+<script src="~/js/encrypt.js"></script>
+<script src="~/js/pixelFacebook.js"></script>
 
 <script>
 
     document.addEventListener("DOMContentLoaded", function (event) {
-        //SDK Facebook
-        fbq('trackCustom', 'Paso_1', { order_id: "124", value: '10000' });
+        var email = sha256("message");
+        var userAgent = window.navigator.userAgent;
+        var urlSource = window.location.href;
 
-        //request api
-        var url = '/Home/PixelFacebook?eventName=Paso_1'
-        $.ajax({
-            type: 'POST',
-            url: url,
-            async: true,
-            dataType: "json",
-            success: function (data) {
-                document.getElementById("json-request").innerHTML = data;
-            },
-            error: function (err) {                    
-                alert(err);                     
-            }
-        });
+        pixelFacebook("Paso_1", userAgent, email, urlSource, "");
 
     });
 </script>

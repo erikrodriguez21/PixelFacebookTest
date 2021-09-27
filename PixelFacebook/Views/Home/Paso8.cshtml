@@ -78,7 +78,7 @@
 
     document.addEventListener("DOMContentLoaded", function (event) {
         //SDK Facebook
-        fbq('trackCustom', 'Paso_8', { order_id: "124", value: '10000' });
+        fbq('trackCustom', 'Paso_8', {}, { eventID: 'Paso8' });
 
         //request api
         var url = '/Home/PixelFacebook?eventName=Paso_8'
@@ -98,6 +98,9 @@
     });
 
     function enviarSolicitud() {
+        //SDK Facebook
+        fbq('trackCustom', 'Solicitud_Enviada', { currency: 'mxn', order_id: '1234', value: '$10,000' }, { eventID: 'SolicitudEnviada' });
+
         document.getElementById("json-solicitud").innerHTML = "";
         //request api
         var url = '/Home/PixelFacebook?eventName=Solicitud_Enviada'
