@@ -94,7 +94,7 @@ namespace PixelFacebook.Controllers
 #endif
 
                 string FBpixelId = "2052647431560475";
-                string FBaccessToken = "EAAotId4ZAUvQBAJ8ARsrJFzOZApY4tMudroZC4L0qJPAz34vpFHufJUnGOvQGqouPgCQlKvvmFjgb7NzQruSFdNaisroVkkV91jZBwYcKCI3COqTS0GMn4ggukP03CdqrlgtlTSCulMiF3k1AMbZAEbJVbpTAKMBzIIps4r0ux5sMlbU1jeu7";
+                string FBaccessToken = "EAAotId4ZAUvQBAG7ZAhQf5Iqk0uJQQG58ljXc89KcjNyZAQYQF7PxPtZCAmrlLru2yTV4GnufH7ob2jZAOKs6jj2FeTxE3osBhc7VUqB1jbAXpOt1eSpbiMhZCstbA9OS3rqyDbPv586vTJTwPZAFkFH5yQUi2d94tAZATxTQnUsIzeZCFZB8KSSfN";
 
                 if (string.IsNullOrEmpty(FBpixelId) || string.IsNullOrEmpty(FBaccessToken))
                 {

@@ -31,6 +31,7 @@ function pixelFacebook(eventName, userAgent, email, urlSource, guid, monto = nul
         },
         success: function (data) {
             var json = JSON.parse(data);
+            document.getElementById('json-request').innerHTML = data;
             console.log('API Pixel Facebook');
         },
         error: function (err) {
@@ -49,6 +50,7 @@ function sdkPixel(eventName, monto, guid) {
             //SDK Facebook    
             fbq('init', pixelId);
             fbq('trackCustom', eventName, { currency: monto != null ? 'mxn' : null, value: monto }, { eventID: eventName.replace('_', '') + guid });
+            document.getElementById('json-request-sdk').innerHTML = 'EvnetID: ' + eventName.replace('_', '') + guid ;
             console.log('SDK Pixel Facebook');
         },
         error: function (err) {

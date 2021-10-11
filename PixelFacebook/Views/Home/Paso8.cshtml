@@ -65,9 +65,8 @@
     <div class="col-md-12">
         <h5>SDK Request</h5>
         <pre>
-        <code id="json-request" class="language-javascript">
-                //SDK Facebook
-                fbq('trackCustom', 'Paso_8', { order_id: "124", value: '10000' });
+        <code id="json-request-sdk" class="language-javascript">
+                
             </code>
         </pre>
     </div>
@@ -101,6 +100,9 @@
         var guid = '@ContextAccessor.HttpContext.Session.GetString("GuidPIxelFacebook")';
         pixelFacebook("Solicitud_Enviada", userAgent, email, urlSource, guid);
         //-- pixel facebook  --//
+
+        document.getElementById('json-solicitud').innerHTML = 'SolicitudEnviada' + guid;
+
     }
 
 </script>
