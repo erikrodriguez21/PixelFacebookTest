@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "Paso1";
-    string guid = ContextAccessor.HttpContext.Session.GetString("GuidPIxelFacebook");
+
 }
 
 <div class="container-fluid">
@@ -64,7 +64,7 @@
         var email = sha256('example@gmail.com');
         var userAgent = window.navigator.userAgent;
         var urlSource = window.location.href;
-        var guid = '@guid';
+        var guid = '@ContextAccessor.HttpContext.Session.GetString("GuidPIxelFacebook")';
         pixelFacebook("Paso_1", userAgent, email, urlSource, guid);
         //-- pixel facebook  --//
 

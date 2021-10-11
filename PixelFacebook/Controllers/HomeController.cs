@@ -35,26 +35,38 @@ namespace PixelFacebook.Controllers
 
         public IActionResult Paso1() 
         {
-            HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("GuidPIxelFacebook")))
+            {
+                HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
+            }
             return View();
         }
 
         public IActionResult Paso5() 
         {
-            HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("GuidPIxelFacebook")))
+            {
+                HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
+            }
             return View();
         }
 
         public IActionResult Paso8() 
         {
-            HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("GuidPIxelFacebook")))
+            {
+                HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
+            }
             return View();
         }
 
         [HttpPost] 
         public IActionResult Paso8(int id) 
         {
-            HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("GuidPIxelFacebook")))
+            {
+                HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
+            }
             return View();
         }
 
@@ -78,11 +90,11 @@ namespace PixelFacebook.Controllers
                 ApiFacebookService.EventName evtName;
 
 #if TEST || DEBUG
-                testEvntCode = "TEST76355"; //codigo de prueba que proporciona facebook, buscar ambiente de desarrollo 
+                testEvntCode = "TEST12197"; //codigo de prueba que proporciona facebook, buscar ambiente de desarrollo 
 #endif
 
                 string FBpixelId = "2052647431560475";
-                string FBaccessToken = "EAAotId4ZAUvQBAPZA3OuabT2qs0jt1OoZC0BkNp3KZBLWTHVUZAxSuOUZBr3qaVREZCp3FqlR4G0gEK2T314yZBsuTQAK3ZBSuLbN6Cq2HCrxeGUZBCLjGqY0fwiAxYNkCYJzNonw7VarDLOl7p4IlVcmMVUBAzvPuNEmQ7BxxoG0wsZBjqF2LGrRrWAXpF7imodQAZD";
+                string FBaccessToken = "EAAotId4ZAUvQBAJ8ARsrJFzOZApY4tMudroZC4L0qJPAz34vpFHufJUnGOvQGqouPgCQlKvvmFjgb7NzQruSFdNaisroVkkV91jZBwYcKCI3COqTS0GMn4ggukP03CdqrlgtlTSCulMiF3k1AMbZAEbJVbpTAKMBzIIps4r0ux5sMlbU1jeu7";
 
                 if (string.IsNullOrEmpty(FBpixelId) || string.IsNullOrEmpty(FBaccessToken))
                 {

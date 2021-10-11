@@ -73,35 +73,29 @@
     </div>
 </div>
 
-
+<script src="~/js/sha256.min.js"></script>
+<script src="~/js/pixelFacebook.js"></script>
 
 
 <script>
 
     document.addEventListener("DOMContentLoaded", function (event) {
-        //SDK Facebook
-        fbq('trackCustom', 'Paso_8', {}, { eventID: 'Paso8' });
 
-        //request api
-        var url = '/Home/PixelFacebook?eventName=Paso_8'
-        $.ajax({
-            type: 'POST',
-            url: url,
-            async: true,
-            dataType: "json",
-            success: function (data) {
-                document.getElementById("json-request").innerHTML = data;
-            },
-            error: function (err) {
-                alert(err);
-            }
-        });
+        //-- pixel facebook  --//
+        var email = sha256('example@gmail.com');
+        var userAgent = window.navigator.userAgent;
+        var urlSource = window.location.href;
+        var guid = '@ContextAccessor.HttpContext.Session.GetString("GuidPIxelFacebook")';
+        pixelFacebook("Paso_8", userAgent, email, urlSource, guid);
+        //-- pixel facebook  --//
+
+
 
     });
 
     function enviarSolicitud() {
         //-- pixel facebook  --//
-        var email = sha256('@User.Identity.Name.ToString()');
+         var email = sha256('example@gmail.com');
         var userAgent = window.navigator.userAgent;
         var urlSource = window.location.href;
         var guid = '@ContextAccessor.HttpContext.Session.GetString("GuidPIxelFacebook")';

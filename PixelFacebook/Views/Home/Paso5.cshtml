@@ -55,12 +55,14 @@
     </div>
 </div>
 
+<script src="~/js/sha256.min.js"></script>
+<script src="~/js/pixelFacebook.js"></script>
 <script>
 
     document.addEventListener("DOMContentLoaded", function (event) {
 
         //-- pixel facebook  --//
-        var email = sha256('@User.Identity.Name.ToString()');
+        var email = sha256('example@gmail.com');
         var userAgent = window.navigator.userAgent;
         var urlSource = window.location.href;
         var guid = '@ContextAccessor.HttpContext.Session.GetString("GuidPIxelFacebook")';
