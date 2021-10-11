@@ -35,22 +35,26 @@ namespace PixelFacebook.Controllers
 
         public IActionResult Paso1() 
         {
+            HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
             return View();
         }
 
         public IActionResult Paso5() 
         {
+            HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
             return View();
         }
 
         public IActionResult Paso8() 
         {
+            HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
             return View();
         }
 
         [HttpPost] 
         public IActionResult Paso8(int id) 
         {
+            HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
             return View();
         }
 
@@ -59,12 +63,15 @@ namespace PixelFacebook.Controllers
         {
             try
             {
+                string guid = HttpContext.Session.GetString("GuidPIxelFacebook");
+
                 // Requires: using Microsoft.AspNetCore.Http;
-                if (string.IsNullOrEmpty(HttpContext.Session.GetString("GuidPIxelFacebook")))
+                if (string.IsNullOrEmpty(guid))
                 {
                     HttpContext.Session.SetString("GuidPIxelFacebook", GetNewGUID());
-                    
+                    guid = HttpContext.Session.GetString("GuidPIxelFacebook");
                 }
+               
 
                 string testEvntCode = "", jsonRes = "";
                 string clientIp = _apiFB.GetClientIp(HttpContext);               
@@ -84,7 +91,7 @@ namespace PixelFacebook.Controllers
 
                 evtName = (ApiFacebookService.EventName)Enum.Parse(typeof(ApiFacebookService.EventName), eventName);
 
-                jsonRes = await _apiFB.PostPixelFB(FBaccessToken, FBpixelId, monto, evtName, userAgent, email, urlSource, clientIp, HttpContext.Session.GetString("GuidPIxelFacebook"), testEvntCode);
+                jsonRes = await _apiFB.PostPixelFB(FBaccessToken, FBpixelId, monto, evtName, userAgent, email, urlSource, clientIp, guid, testEvntCode);
                 return Json(jsonRes);
             }
             catch (Exception ex)

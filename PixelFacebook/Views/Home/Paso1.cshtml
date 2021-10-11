@@ -1,9 +1,10 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor ContextAccessor
+
 @{
     ViewData["Title"] = "Paso1";
+    string guid = ContextAccessor.HttpContext.Session.GetString("GuidPIxelFacebook");
 }
-@using Microsoft.AspNetCore.Http;
-@inject IHttpContextAccessor ContextAccessor
 
 <div class="container-fluid">
     <div class="row">
@@ -63,8 +64,8 @@
         var email = sha256('example@gmail.com');
         var userAgent = window.navigator.userAgent;
         var urlSource = window.location.href;
-        var guid = '@ContextAccessor.HttpContext.Session.GetString("GuidPIxelFacebook")';   
-        pixelFacebook("Paso_1", userAgent, email, urlSource);
+        var guid = '@guid';
+        pixelFacebook("Paso_1", userAgent, email, urlSource, guid);
         //-- pixel facebook  --//
 
     });
