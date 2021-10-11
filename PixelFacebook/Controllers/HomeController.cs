@@ -71,7 +71,7 @@ namespace PixelFacebook.Controllers
                 ApiFacebookService.EventName evtName;
 
 #if TEST || DEBUG
-                testEvntCode = "TEST14665"; //codigo de prueba que proporciona facebook, buscar ambiente de desarrollo 
+                testEvntCode = "TEST76355"; //codigo de prueba que proporciona facebook, buscar ambiente de desarrollo 
 #endif
 
                 string FBpixelId = "2052647431560475";

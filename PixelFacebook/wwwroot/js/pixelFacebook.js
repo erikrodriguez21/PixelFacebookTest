@@ -1,6 +1,6 @@
 ﻿
 
-function pixelFacebook(eventName, userAgent, email, urlSource, monto = null) {
+function pixelFacebook(eventName, userAgent, email, urlSource, guid, monto = null) {
 
     !function (f, b, e, v, n, t, s) {
         if (f.fbq) return; n = f.fbq = function () {
@@ -14,7 +14,7 @@ function pixelFacebook(eventName, userAgent, email, urlSource, monto = null) {
     }(window, document, 'script',
         'https://connect.facebook.net/en_US/fbevents.js');
     //SDK
-    sdkPixel(eventName, monto)
+    sdkPixel(eventName, monto, guid)
 
     //api
     $.ajax({
@@ -39,7 +39,7 @@ function pixelFacebook(eventName, userAgent, email, urlSource, monto = null) {
     });
 }
 
-function sdkPixel(eventName, monto) {
+function sdkPixel(eventName, monto, guid) {
     $.ajax({
         type: 'POST',
         url: '/Home/GetPixelId',
@@ -48,7 +48,7 @@ function sdkPixel(eventName, monto) {
         success: function (pixelId) {
             //SDK Facebook    
             fbq('init', pixelId);
-            fbq('trackCustom', eventName, { currency: monto != null ? 'mxn' : null, value: monto }, { eventID: eventName.replace('_', '') });
+            fbq('trackCustom', eventName, { currency: monto != null ? 'mxn' : null, value: monto }, { eventID: eventName.replace('_', '') + guid });
             console.log('SDK Pixel Facebook');
         },
         error: function (err) {
