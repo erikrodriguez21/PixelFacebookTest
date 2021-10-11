@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using PixelFacebook.HttpClientService.DtoObjets;
 using System;
 using System.Collections.Generic;
@@ -30,11 +31,22 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
             //_testEventCode = _config.GetSection("testEventCode").Value;
         }
 
-        public async Task<string> testApi(string url)
+        public async Task<string> testApi(string url, HttpContext context)
         {
-
-            var res = await _httpClient.GetExternalIp();          
-            return $"IP: {res} \n" + await _httpClient.GetAsync(url); 
+            try
+            {
+                string clientIp = _httpClient.GetClientIPAddress(context);
+                if (clientIp == "::1")
+                {
+                    clientIp = "127.0.0.1";
+                }
+                var res = await _httpClient.GetExternalIp();
+                return $"Client IP: {clientIp} \nApp Serice IP: {res} \n" + await _httpClient.GetAsync(url);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
 
@@ -51,20 +63,21 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
         /// <param name="value"></param>
         /// <param name="eventName"></param>
         /// <returns></returns>
-        public async Task<string> PostPixelFB(string value, EventName eventName, string userAgent, string email, string urlSource, string testEventCode = null) 
+        public async Task<string> PostPixelFB(string accessToken, string pixelID, string value, EventName eventName, string userAgent, string email, string urlSource,
+           string clientIp, string guid, string testEventCode = null)
         {
             try
             {
-               
-                string data = await GetDataJson(value, eventName, userAgent, email, urlSource), url = "";
+                string url = "";
+                string data = GetDataJson(value, eventName, userAgent, email, urlSource, clientIp, guid);
 
                 if (string.IsNullOrEmpty(testEventCode))
                 {
-                    url = $"{_urlApi + _pixelId}/events?access_token={_accessToken}&data={data}";
+                    url = $"{_urlApi + pixelID}/events?access_token={accessToken}&data={data}";
                 }
                 else
                 {
-                    url = $"{_urlApi + _pixelId}/events?access_token={_accessToken}&data={data}&test_event_code={testEventCode}";
+                    url = $"{_urlApi + pixelID}/events?access_token={accessToken}&data={data}&test_event_code={testEventCode}";
                 }
 
                 return await _httpClient.PostAsync(url, "");
@@ -75,9 +88,14 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
             }
         }
 
-        #region methods
+        public string GetClientIp(HttpContext context)
+        {
+            return _httpClient.GetClientIPAddress(context);
+        }
 
-        public async Task<string> GetDataJson(string value, EventName eventName, string userAgent, string email, string urlSource)
+
+        #region methods
+        public string GetDataJson(string value, EventName eventName, string userAgent, string email, string urlSource, string clientIp, string guid)
         {
             try
             {
@@ -87,17 +105,17 @@ namespace PixelFacebook.HttpClientService.ApiFacebookService
                 var list = new List<Datum>();
                 //monto
                 custom.value = value;
-                custom.currency = "mxn";
+                custom.currency = eventName != EventName.Solicitud_Enviada ? null : "mxn";
                 //action source
-                data.action_source = "website";                
+                data.action_source = "website";
                 //user data
                 data.user_data = new User_Data();
-                data.user_data.client_ip_address = await _httpClient.GetExternalIp(); //optiene la ip del servidor
+                data.user_data.client_ip_address = clientIp; //optiene la ip del cliente
                 data.user_data.client_user_agent = userAgent;
                 data.user_data.em = new string[] { email };
                 //event
-                data.event_id = eventName.ToString().Replace("_", "");
-                data.event_source_url = urlSource; 
+                data.event_id = eventName.ToString().Replace("_", "") + guid;
+                data.event_source_url = urlSource;
                 data.event_name = eventName.ToString();
                 data.event_time = DateTimeOffset.Now.ToUnixTimeSeconds();
                 data.custom_data = custom;

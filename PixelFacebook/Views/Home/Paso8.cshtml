@@ -2,7 +2,8 @@
 @{
     ViewData["Title"] = "Paso8";
 }
-
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor ContextAccessor
 
 <div class="container-fluid">
     <div class="row">
@@ -36,13 +37,14 @@
 </div>
 <hr />
 <button onclick="enviarSolicitud();" class="btn btn-primary">Enviar Solicitud</button>
-<br /><br />
+<br />
+<br />
 
 <div class="row">
     <div class="col-md-6">
         <h5>Request Result</h5>
         <pre>
-            <code id="json-request" class="language-javascript">
+        <code id="json-request" class="language-javascript">
     
 
             </code>
@@ -58,17 +60,17 @@
         </pre>
     </div>
 </div>
- 
+
 <div class="row">
     <div class="col-md-12">
         <h5>SDK Request</h5>
         <pre>
-            <code id="json-request" class="language-javascript">
+        <code id="json-request" class="language-javascript">
                 //SDK Facebook
                 fbq('trackCustom', 'Paso_8', { order_id: "124", value: '10000' });
             </code>
         </pre>
-    </div>   
+    </div>
 </div>
 
 
@@ -98,25 +100,13 @@
     });
 
     function enviarSolicitud() {
-        //SDK Facebook
-        fbq('trackCustom', 'Solicitud_Enviada', { currency: 'mxn', order_id: '1234', value: '$10,000' }, { eventID: 'SolicitudEnviada' });
-
-        document.getElementById("json-solicitud").innerHTML = "";
-        //request api
-        var url = '/Home/PixelFacebook?eventName=Solicitud_Enviada'
-        $.ajax({
-            type: 'POST', 
-            url: url,
-            async: true,
-            dataType: "json",
-            success: function (data) {
-                console.log(data);
-                document.getElementById("json-solicitud").innerHTML = data;
-            },
-            error: function (err) {
-                alert(err);
-            }
-        });
+        //-- pixel facebook  --//
+        var email = sha256('@User.Identity.Name.ToString()');
+        var userAgent = window.navigator.userAgent;
+        var urlSource = window.location.href;
+        var guid = '@ContextAccessor.HttpContext.Session.GetString("GuidPIxelFacebook")';
+        pixelFacebook("Paso_1", userAgent, email, urlSource);
+        //-- pixel facebook  --//
     }
 
 </script>

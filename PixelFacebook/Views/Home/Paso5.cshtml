@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Paso5";
 }
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor ContextAccessor
 
 <div class="container-fluid">
     <div class="row">
@@ -56,23 +58,14 @@
 <script>
 
     document.addEventListener("DOMContentLoaded", function (event) {
-        //SDK Facebook
-        fbq('trackCustom', 'Paso_5', {}, { eventID: 'Paso5' });
 
-        //request api 
-        var url = '/Home/PixelFacebook?eventName=Paso_5'
-        $.ajax({
-            type: 'POST',
-            url: url,
-            async: true,
-            dataType: "json",
-            success: function (data) {
-                document.getElementById("json-request").innerHTML = data;
-            },
-            error: function (err) {
-                alert(err);
-            }
-        });
+        //-- pixel facebook  --//
+        var email = sha256('@User.Identity.Name.ToString()');
+        var userAgent = window.navigator.userAgent;
+        var urlSource = window.location.href;
+        var guid = '@ContextAccessor.HttpContext.Session.GetString("GuidPIxelFacebook")';
+        pixelFacebook("Paso_1", userAgent, email, urlSource);
+        //-- pixel facebook  --//
 
     });
 </script>

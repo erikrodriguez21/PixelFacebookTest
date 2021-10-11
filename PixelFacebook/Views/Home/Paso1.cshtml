@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Paso1";
 }
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor ContextAccessor
 
 <div class="container-fluid">
     <div class="row">
@@ -51,17 +53,19 @@
     </div>
 </div>
 
-<script src="~/js/encrypt.js"></script>
+<script src="~/js/sha256.min.js"></script>
 <script src="~/js/pixelFacebook.js"></script>
 
 <script>
 
     document.addEventListener("DOMContentLoaded", function (event) {
-        var email = sha256("message");
+       //-- pixel facebook  --//
+        var email = sha256('example@gmail.com');
         var userAgent = window.navigator.userAgent;
         var urlSource = window.location.href;
-
-        pixelFacebook("Paso_1", userAgent, email, urlSource, "");
+        var guid = '@ContextAccessor.HttpContext.Session.GetString("GuidPIxelFacebook")';   
+        pixelFacebook("Paso_1", userAgent, email, urlSource);
+        //-- pixel facebook  --//
 
     });
 </script>

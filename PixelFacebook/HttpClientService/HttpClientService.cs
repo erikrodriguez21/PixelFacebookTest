@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PixelFacebook.HttpClientService
@@ -190,6 +187,25 @@ namespace PixelFacebook.HttpClientService
         #endregion
 
         #region Methods
+        public string GetClientIPAddress(HttpContext context)
+        {
+            string ipAddress = context.Request.Headers["X-Forwarded-For"];
+            if (!string.IsNullOrEmpty(ipAddress))
+            {
+                string[] addresses = ipAddress.Split(':');
+                if (addresses.Length != 0)
+                {
+                    return addresses[0];
+                }
+            }            
+            string[] result = context.Request.HttpContext.Features.Get<IHttpConnectionFeature>().RemoteIpAddress.ToString().Split(':');
+            if (result.Length == 0 || result[0] == "127.0.0.1" || result[0] == "")
+            {
+                return "123.123.123.123";
+            }
+            return result[0];
+        }
+
         public async Task<string> GetExternalIp() 
         {
             return await GetAsync("https://api.ipify.org/");

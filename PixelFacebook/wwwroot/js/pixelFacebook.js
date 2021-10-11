@@ -1,13 +1,22 @@
 ﻿
 
+function pixelFacebook(eventName, userAgent, email, urlSource, monto = null) {
 
+    !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    //SDK
+    sdkPixel(eventName, monto)
 
-function pixelFacebook(eventName, userAgent, email, urlSource, monto) {
-
-   
-    //SDK Facebook
-    //fbq('trackCustom', eventName, { value='' }, { eventID: '' });
-
+    //api
     $.ajax({
         type: 'POST',
         url: '/Home/PixelFacebook',
@@ -21,20 +30,34 @@ function pixelFacebook(eventName, userAgent, email, urlSource, monto) {
             monto: monto
         },
         success: function (data) {
-            document.getElementById('json-request').innerHTML = data;
+            var json = JSON.parse(data);
+            console.log('API Pixel Facebook');
         },
         error: function (err) {
-            alert(err);
+            console.log("error API PixelFacebook: " + err.responseText);
         }
     });
-
-
-
-
-
-    console.log(eventName, email, userAgent, urlSource, monto);
-
 }
+
+function sdkPixel(eventName, monto) {
+    $.ajax({
+        type: 'POST',
+        url: '/Home/GetPixelId',
+        async: true,
+        dataType: 'json',
+        success: function (pixelId) {
+            //SDK Facebook    
+            fbq('init', pixelId);
+            fbq('trackCustom', eventName, { currency: monto != null ? 'mxn' : null, value: monto }, { eventID: eventName.replace('_', '') });
+            console.log('SDK Pixel Facebook');
+        },
+        error: function (err) {
+            console.log("error SDK PixelFacebook: " + err.responseText);
+        }
+    });
+}
+
+
 
 
 

@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "js-sha256@0.9.0",
+      "destination": "wwwroot/js/",
+      "files": [
+        "sha256.min.js"
+      ]
+    }
+  ]
+}

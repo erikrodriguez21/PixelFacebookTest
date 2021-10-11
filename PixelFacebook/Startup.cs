@@ -25,6 +25,18 @@ namespace PixelFacebook
         public void ConfigureServices(IServiceCollection services)
         {   
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.AddDistributedMemoryCache();
+
+            services.AddHttpContextAccessor();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(20);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             //servicio de facebook pixel
             services.AddScoped<ApiFacebookService>();
         }
@@ -44,10 +56,9 @@ namespace PixelFacebook
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseAuthorization();            
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
